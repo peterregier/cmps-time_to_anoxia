@@ -1,8 +1,16 @@
 ---
-title: "Untitled"
-output: github_document:
+title: "Time to anoxia"
+output: 
+  github_document:
   html_preview: true
 ---
+
+Soil samples were inundated with deionized water and incubated for 12-hr, 24-hr, or 2-wk. Dissolved oxygen was measured continuously during the incubation. At the end of the incubation, the samples were centrifuged and filtered, and analyzed for dissolved nutrients (supernatant) and total nutrients (soil pellet).
+
+---
+
+## Optode data (dissolved oxygen)
+
 
 ```{r setup, include=FALSE, echo=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
@@ -10,6 +18,14 @@ knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE)
 ```
 
+
+```{r, fig.height=4, fig.width=8}
+tar_read(gg_optode)$grouped
+```
+
+```{r, fig.height=12, fig.width=8}
+tar_read(gg_optode)$individual
+```
 
 
 
