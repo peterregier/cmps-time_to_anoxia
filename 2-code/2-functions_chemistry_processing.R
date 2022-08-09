@@ -12,7 +12,7 @@ import_weoc_data = function(FILEPATH, PATTERN){
 
 }
 
-process_weoc = function(weoc_data, analysis_key, moisture_processed, subsampling){
+process_weoc = function(weoc_data, analysis_key){
   
   npoc_processed = 
     weoc_data %>% 
