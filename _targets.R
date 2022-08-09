@@ -18,9 +18,8 @@ tar_option_set(
 # Load the R scripts with your custom functions:
 source("2-code/0-packages.R")
 source("2-code/0b-initial_processing.R")
-source("2-code/1-functions_optode_processing.R")
-source("2-code/2-functions_chemistry_processing.R")
-source("2-code/3-functions_analysis.R")
+source("2-code/1-functions_processing.R")
+source("2-code/2-functions_analysis.R")
 
 # list of targets
 list(
