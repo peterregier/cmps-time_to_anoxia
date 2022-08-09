@@ -28,6 +28,11 @@ tar_read(gg_optode)$individual
 ```
 
 
+## Dissolved nutrients/chemistry
+```{r}
+tar_read(gg_weoc)
+```
+
 
 
 
