@@ -1,0 +1,111 @@
+[Header]	
+System	TOC_TNb Standard	
+S/W Version	1.00	
+User		
+Date/Time	8/9/2022 10:26:26 AM	
+
+[System]	
+Instrument Options	TOC/ASI/IC Unit/TN/	
+
+[Data]	
+Type	Anal.	Sample Name	Sample ID	Result(TOC)	Result(TC)	Result(IC)	Result(POC)	Result(NPOC)	Result(TN)	Unit	Vial	Date / Time	
+Standard	NPOC	cal	Untitled					100.0		mg/L	85, 86, 87, 88, 89, 90	8/5/2022 4:21:03 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0177	anoxia					12.73		mg/L	1	8/5/2022 4:37:22 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0178						12.02		mg/L	2	8/5/2022 4:50:38 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0179						14.10		mg/L	3	8/5/2022 5:07:29 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0180						13.04		mg/L	4	8/5/2022 5:21:25 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0181						12.84		mg/L	5	8/5/2022 5:34:59 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0182						3.725		mg/L	6	8/5/2022 5:47:44 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0183						5.003		mg/L	7	8/5/2022 6:00:30 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0184						4.084		mg/L	8	8/5/2022 6:13:12 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0185						3.893		mg/L	9	8/5/2022 6:28:20 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0186						3.858		mg/L	10	8/5/2022 6:41:04 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0187						13.32		mg/L	11	8/5/2022 6:54:37 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0188						11.73		mg/L	12	8/5/2022 7:08:23 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0189						15.79		mg/L	13	8/5/2022 7:22:21 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0190						14.07		mg/L	14	8/5/2022 7:36:08 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0191						11.66		mg/L	15	8/5/2022 7:52:28 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0192						3.223		mg/L	16	8/5/2022 8:07:36 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0193						2.878		mg/L	17	8/5/2022 8:19:41 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0194						3.349		mg/L	18	8/5/2022 8:34:32 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0195						3.768		mg/L	19	8/5/2022 8:49:25 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0196						3.380		mg/L	20	8/5/2022 9:01:39 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0197						0.8506		mg/L	21	8/5/2022 9:17:36 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0198						0.6605		mg/L	22	8/5/2022 9:31:28 PM	
+Unknown	NPOC	DIW						0.2717		mg/L	80	8/5/2022 9:45:22 PM	
+Unknown	NPOC	chkstd-5ppm						4.829		mg/L	81	8/5/2022 10:00:38 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0199						4.831		mg/L	23	8/5/2022 10:13:21 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0200						4.346		mg/L	24	8/5/2022 10:26:14 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0201						3.834		mg/L	25	8/5/2022 10:41:24 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0202						4.855		mg/L	26	8/5/2022 10:54:11 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0203						4.612		mg/L	27	8/5/2022 11:06:55 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0204						2.907		mg/L	28	8/5/2022 11:19:08 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0205						2.866		mg/L	29	8/5/2022 11:33:56 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0206						3.337		mg/L	30	8/5/2022 11:46:40 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0207						3.523		mg/L	31	8/5/2022 11:59:20 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0208						3.405		mg/L	32	8/6/2022 12:12:02 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0209						3.539		mg/L	33	8/6/2022 12:26:56 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0210						3.673		mg/L	34	8/6/2022 12:42:08 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0211						3.329		mg/L	35	8/6/2022 12:57:06 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0212						3.931		mg/L	36	8/6/2022 1:12:12 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0213						4.044		mg/L	37	8/6/2022 1:24:50 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0214						1.401		mg/L	38	8/6/2022 1:36:46 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0215						1.429		mg/L	39	8/6/2022 1:50:58 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0216						1.089		mg/L	40	8/6/2022 2:02:41 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0217						1.418		mg/L	41	8/6/2022 2:14:33 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0218						1.287		mg/L	42	8/6/2022 2:28:36 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0219						0.5409		mg/L	43	8/6/2022 2:42:37 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0220						0.3886		mg/L	44	8/6/2022 2:59:00 AM	
+Unknown	NPOC	DIW						0.3552		mg/L	82	8/6/2022 3:13:11 AM	
+Unknown	NPOC	chkstd-5ppm						4.882		mg/L	83	8/6/2022 3:26:01 AM	
+Standard	NPOC	cal	Untitled					100.0		mg/L	86, 87, 88, 89, 90, 91	8/8/2022 4:58:24 PM	
+Unknown	NPOC	DIW	Untitled					0.2756		mg/L	80	8/8/2022 5:14:36 PM	
+Unknown	NPOC	chkstd-5ppm	Untitled					4.826		mg/L	81	8/8/2022 5:27:40 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0221	Untitled					10.86		mg/L	1	8/8/2022 5:41:01 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0222	Untitled					11.20		mg/L	2	8/8/2022 5:59:57 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0223	Untitled					11.48		mg/L	3	8/8/2022 6:13:01 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0224	Untitled					10.27		mg/L	4	8/8/2022 6:29:10 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0225	Untitled					11.92		mg/L	5	8/8/2022 6:42:32 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0226	Untitled					3.532		mg/L	6	8/8/2022 6:54:54 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0227	Untitled					3.472		mg/L	7	8/8/2022 7:09:45 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0228	Untitled					3.213		mg/L	8	8/8/2022 7:24:54 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0229	Untitled					2.921		mg/L	9	8/8/2022 7:37:03 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0230	Untitled					3.359		mg/L	10	8/8/2022 7:52:41 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0231	Untitled					11.40		mg/L	11	8/8/2022 8:05:53 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0232	Untitled					10.71		mg/L	12	8/8/2022 8:19:36 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0233	Untitled					10.26		mg/L	13	8/8/2022 8:32:53 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0234	Untitled					7.250		mg/L	14	8/8/2022 8:45:48 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0235	Untitled					8.608		mg/L	15	8/8/2022 8:58:52 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0236	Untitled					2.593		mg/L	16	8/8/2022 9:13:31 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0237	Untitled					2.683		mg/L	17	8/8/2022 9:28:28 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0238	Untitled					2.913		mg/L	18	8/8/2022 9:40:49 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0239	Untitled					2.507		mg/L	19	8/8/2022 9:55:41 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0240	Untitled					2.764		mg/L	20	8/8/2022 10:08:07 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0241	Untitled					0.5216		mg/L	21	8/8/2022 10:24:17 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0242	Untitled					0.5049		mg/L	22	8/8/2022 10:40:24 PM	
+Unknown	NPOC	DIW	Untitled					0.4977		mg/L	82	8/8/2022 10:56:52 PM	
+Unknown	NPOC	chkstd-5ppm	Untitled					4.666		mg/L	83	8/8/2022 11:09:35 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0243	Untitled					10.64		mg/L	23	8/8/2022 11:23:25 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0244	Untitled					10.59		mg/L	24	8/8/2022 11:39:34 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0245	Untitled					9.942		mg/L	25	8/8/2022 11:52:59 PM	
+Unknown	NPOC	DOC_CMPS_KFP_0246	Untitled					11.16		mg/L	26	8/9/2022 12:09:03 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0247	Untitled					10.62		mg/L	27	8/9/2022 12:24:57 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0248	Untitled					3.312		mg/L	28	8/9/2022 12:39:57 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0249	Untitled					3.278		mg/L	29	8/9/2022 12:52:30 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0250	Untitled					3.157		mg/L	30	8/9/2022 1:05:14 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0251	Untitled					3.474		mg/L	31	8/9/2022 1:17:30 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0252	Untitled					3.556		mg/L	32	8/9/2022 1:30:13 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0253	Untitled					7.076		mg/L	33	8/9/2022 1:43:26 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0254	Untitled					14.17		mg/L	34	8/9/2022 1:57:17 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0255	Untitled					9.353		mg/L	35	8/9/2022 2:10:35 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0256	Untitled					7.679		mg/L	36	8/9/2022 2:23:54 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0257	Untitled					8.610		mg/L	37	8/9/2022 2:36:56 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0258	Untitled					2.142		mg/L	38	8/9/2022 2:49:24 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0259	Untitled					2.974		mg/L	39	8/9/2022 3:02:06 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0260	Untitled					2.798		mg/L	40	8/9/2022 3:14:26 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0261	Untitled					2.631		mg/L	41	8/9/2022 3:29:08 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0262	Untitled					2.831		mg/L	42	8/9/2022 3:41:42 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0263	Untitled					0.7215		mg/L	43	8/9/2022 3:55:22 AM	
+Unknown	NPOC	DOC_CMPS_KFP_0264	Untitled					0.5955		mg/L	44	8/9/2022 4:06:54 AM	
+Unknown	NPOC	DIW	Untitled					0.2454		mg/L	84	8/9/2022 4:23:04 AM	
+Unknown	NPOC	chkstd-5ppm	Untitled					4.687		mg/L	85	8/9/2022 4:36:09 AM	
