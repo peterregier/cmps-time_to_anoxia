@@ -1,7 +1,31 @@
+# TIME TO ANOXIA
+
+## 1-functions_processing.R
+## Use this script to process optode and chemistry data.
+
+## KFP, August 2022
+
+######################## ####
+######################## ####
 
 
 
-# load files
+# refactor functions ------------------------------------------------------
+## functions to set the order of factors
+
+recode_levels = function(dat){
+  dat %>% 
+    mutate(location = factor(location, 
+                             levels = c("upland-A", "upland-B", "transition-A", "wetland-A")),
+           timepoint = factor(timepoint, 
+                              levels = c("time-zero", "12-hour", "24-hour", "2-week")))
+}
+
+
+#
+# process data ------------------------------------------------------------
+# optodes
+
 import_optode_data = function(FILEPATH){
   filePaths_spectra <- list.files(path = FILEPATH,pattern = "*.csv", full.names = TRUE)
   spectra_dat <- do.call(rbind, lapply(filePaths_spectra, function(path) {
@@ -13,15 +37,6 @@ import_optode_data = function(FILEPATH){
     df[["source"]] <- rep(path, nrow(df))
     df}))
 }
-
-
-## optode_data = import_optode_data("1-data/optodes")
-
-## optode_map = read_sheet("1Pumt5ZA2Ojc8Ow-Ex-gH63ChtTtZs1gPKc50UM098rY") %>% mutate(optode_disc_number = as.character(optode_disc_number))
-## sample_key = read_sheet("1ZngRDe_jdiXKymQBaR5MI-F5sGS4rakoAkf6yYJ0YgQ")
-## 
-## 
-
 process_optode_data = function(optode_data, optode_map, sample_key){
   optode_data_processed = 
     optode_data %>% 
@@ -33,35 +48,50 @@ process_optode_data = function(optode_data, optode_map, sample_key){
     mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water")))
 }
 
-plot_optode_data = function(optode_data_processed){
+
+# WEOC
+import_weoc_data = function(FILEPATH, PATTERN){
   
-  grouped = 
-    optode_data_processed %>% 
-    filter(!is.na(location)) %>% 
-    filter(location != "water") %>% 
-    ggplot(aes(x = time_minutes, y = do_mg_L, color = sample_name))+
-    geom_line()+
-    labs(#title = "Time to Anoxia",
-         x = "Elapsed time, minutes",
-         y = "Dissolved oxygen, mg/L")+
-    #geom_smooth(se = F)+
-    facet_grid(timepoint ~ location)+
-    theme(legend.position = "none")
+  filePaths_weoc <- list.files(path = FILEPATH, pattern = PATTERN, full.names = TRUE)
+  weoc_dat <- do.call(bind_rows, lapply(filePaths_weoc, function(path) {
+    df <- read_tsv(path, skip = 10)
+    df}))
   
-  individual = 
-    optode_data_processed %>% 
-    filter(!is.na(location)) %>%
-    filter(location != "water") %>% 
-    ggplot(aes(x = time_minutes, y = do_mg_L, color = location))+
-    geom_line()+
-    labs(#title = "Time to Anoxia",
-         x = "Elapsed time, minutes",
-         y = "Dissolved oxygen, mg/L")+
-    facet_wrap(~timepoint+sample_name, ncol = 5)+
-  #  theme(legend.position = "none")+
-    NULL
+}
+process_weoc = function(weoc_data, analysis_key){
   
-  list(grouped = grouped,
-       individual = individual)
+  npoc_processed = 
+    weoc_data %>% 
+    # remove skipped samples
+    filter(!`Sample ID` %in% "skip") %>% 
+    # keep only relevant columns and rename them
+    dplyr::select(`Sample Name`, `Result(NPOC)`) %>% 
+    rename(analysis_ID = `Sample Name`,
+           npoc_mgL = `Result(NPOC)`) %>% 
+    # keep only sampple rows 
+    filter(grepl("DOC_", analysis_ID)) %>% 
+    # join the analysis key to get the sample_label
+    left_join(analysis_key %>% dplyr::select(analysis_ID, sample_name, NPOC_dilution)) %>%
+    # do blank/dilution correction
+    mutate(blank_mgL = case_when(sample_name == "blank-filter" ~ npoc_mgL)) %>% 
+    fill(blank_mgL, .direction = c("up")) %>% 
+    mutate(NPOC_dilution = as.numeric(NPOC_dilution),
+           npoc_corr_mgL = (npoc_mgL-blank_mgL) * NPOC_dilution) %>% 
+    # join gwc and subsampling weights to normalize data to soil weight
+    #    left_join(moisture_processed) %>% 
+    #    left_join(subsampling %>% dplyr::select(notes, sample_label, WSOC_g)) %>% 
+    #    rename(fm_g = WSOC_g) %>% 
+    #    mutate(od_g = fm_g/((gwc_perc/100)+1),
+    #           soilwater_g = fm_g - od_g,
+    #           npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
+    #           npoc_ug_g = round(npoc_ug_g, 2)) %>% 
+    #    dplyr::select(sample_label, npoc_corr_mgL, npoc_ug_g, notes) %>% 
+    force()
+  
+  npoc_samples = 
+    npoc_processed %>% 
+    filter(grepl("anoxia", sample_name))
+  
+  npoc_samples
 }
 
