@@ -23,7 +23,8 @@ source("2-code/2-functions_analysis.R")
 
 # list of targets
 list(
-  tar_target(sample_key, read.csv("1-data/sample_key.csv")),
+  tar_target(sample_key_file, "1-data/sample_key.csv", format = "file"),
+  tar_target(sample_key, read.csv(sample_key_file)),
   tar_target(sample_weights, read.csv("1-data/sample_weights.csv")),
   tar_target(analysis_key, read.csv("1-data/analysis_key.csv")),
   
@@ -32,6 +33,7 @@ list(
   tar_target(optode_map, read_sheet("1Pumt5ZA2Ojc8Ow-Ex-gH63ChtTtZs1gPKc50UM098rY") %>% 
                mutate(optode_disc_number = as.character(optode_disc_number))),
   tar_target(optode_data_processed, process_optode_data(optode_data, optode_map, sample_key)),
+  tar_target(gg_optode_all, plot_optode_data_all_samples(optode_data_processed)),
   tar_target(gg_optode, plot_optode_data(optode_data_processed)),
   
   # weoc

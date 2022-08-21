@@ -15,9 +15,11 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 
 ![](anoxia_report_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+![](anoxia_report_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
 ## Dissolved nutrients/chemistry
 
-![](anoxia_report_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](anoxia_report_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ------------------------------------------------------------------------
 
@@ -26,7 +28,7 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 Session Info
 </summary>
 
-Date run: 2022-08-09
+Date run: 2022-08-21
 
     ## R version 4.2.1 (2022-06-23)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)
