@@ -38,7 +38,10 @@ import_optode_data = function(FILEPATH){
     df}))
 }
 process_optode_data = function(optode_data, optode_map, sample_key){
-  optode_data_processed = 
+  
+ # sample_key= read.csv( "1-data/sample_key.csv")
+  
+ # optode_data_processed = 
     optode_data %>% 
     mutate(start_date = str_extract(source, "[0-9]{4}-[0-9]{2}-[0-9]{2}"),
            start_date = lubridate::ymd(start_date)) %>% 
@@ -58,7 +61,7 @@ import_weoc_data = function(FILEPATH, PATTERN){
     df}))
   
 }
-process_weoc = function(weoc_data, analysis_key){
+process_weoc = function(weoc_data, analysis_key, moisture, sample_weights){
   
   npoc_processed = 
     weoc_data %>% 
@@ -71,21 +74,21 @@ process_weoc = function(weoc_data, analysis_key){
     # keep only sampple rows 
     filter(grepl("DOC_", analysis_ID)) %>% 
     # join the analysis key to get the sample_label
-    left_join(analysis_key %>% dplyr::select(analysis_ID, sample_name, NPOC_dilution)) %>%
+    left_join(analysis_key) %>%
     # do blank/dilution correction
     mutate(blank_mgL = case_when(sample_name == "blank-filter" ~ npoc_mgL)) %>% 
     fill(blank_mgL, .direction = c("up")) %>% 
     mutate(NPOC_dilution = as.numeric(NPOC_dilution),
            npoc_corr_mgL = (npoc_mgL-blank_mgL) * NPOC_dilution) %>% 
     # join gwc and subsampling weights to normalize data to soil weight
-    #    left_join(moisture_processed) %>% 
-    #    left_join(subsampling %>% dplyr::select(notes, sample_label, WSOC_g)) %>% 
-    #    rename(fm_g = WSOC_g) %>% 
-    #    mutate(od_g = fm_g/((gwc_perc/100)+1),
-    #           soilwater_g = fm_g - od_g,
-    #           npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
-    #           npoc_ug_g = round(npoc_ug_g, 2)) %>% 
-    #    dplyr::select(sample_label, npoc_corr_mgL, npoc_ug_g, notes) %>% 
+        left_join(moisture) %>% 
+        left_join(sample_weights %>% dplyr::select(sample_name, weight_g)) %>% 
+        rename(fm_g = weight_g) %>% 
+        mutate(od_g = fm_g/((moisture_percent/100)+1),
+               soilwater_g = fm_g - od_g,
+               npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
+               npoc_ug_g = round(npoc_ug_g, 2)) %>% 
+        dplyr::select(sample_name, npoc_corr_mgL, npoc_ug_g) %>% 
     force()
   
   npoc_samples = 
