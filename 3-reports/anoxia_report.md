@@ -11,15 +11,22 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 
 ## Optode data (dissolved oxygen)
 
-![](anoxia_report_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](anoxia_report_files/figure-gfm/optode_group_all-1.png)<!-- -->
 
-![](anoxia_report_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](anoxia_report_files/figure-gfm/optode_group_subset-1.png)<!-- -->
 
-![](anoxia_report_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](anoxia_report_files/figure-gfm/optode_indiv_all-1.png)<!-- -->
 
 ## Dissolved nutrients/chemistry
 
-![](anoxia_report_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+    ## $mg_l
+
+![](anoxia_report_files/figure-gfm/weoc-1.png)<!-- -->
+
+    ## 
+    ## $ug_g
+
+![](anoxia_report_files/figure-gfm/weoc-2.png)<!-- -->
 
 ------------------------------------------------------------------------
 

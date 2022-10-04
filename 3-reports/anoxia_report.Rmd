@@ -19,21 +19,21 @@ knitr::opts_chunk$set(echo = FALSE,
 ```
 
 
-```{r, fig.height=4, fig.width=8}
+```{r optode_group_all, fig.height=4, fig.width=8}
 tar_read(gg_optode_all)$grouped
 ```
 
-```{r, fig.height=4, fig.width=8}
+```{r optode_group_subset, fig.height=4, fig.width=8}
 tar_read(gg_optode)$grouped
 ```
 
-```{r, fig.height=12, fig.width=8}
+```{r optode_indiv_all, fig.height=12, fig.width=8}
 tar_read(gg_optode_all)$individual
 ```
 
 
 ## Dissolved nutrients/chemistry
-```{r}
+```{r, weoc}
 tar_read(gg_weoc)
 ```
 

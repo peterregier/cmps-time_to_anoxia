@@ -27,6 +27,7 @@ list(
   tar_target(sample_key, read.csv(sample_key_file)),
   tar_target(sample_weights, read.csv("1-data/sample_weights.csv")),
   tar_target(analysis_key, read.csv("1-data/analysis_key.csv")),
+  tar_target(moisture, read.csv("1-data/moisture.csv")),
   
   # optode
   tar_target(optode_data, import_optode_data("1-data/optodes")),
@@ -38,7 +39,7 @@ list(
   
   # weoc
   tar_target(weoc_data, import_weoc_data(FILEPATH = "1-data/npoc", PATTERN = "Summary")),
-  tar_target(weoc_processed, process_weoc(weoc_data, analysis_key)),
+  tar_target(weoc_processed, process_weoc(weoc_data, analysis_key, moisture, sample_weights)),
   tar_target(gg_weoc, plot_weoc(weoc_processed)),
   
   # report
