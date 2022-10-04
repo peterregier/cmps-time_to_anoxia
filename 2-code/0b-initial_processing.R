@@ -37,6 +37,20 @@ analysis_key[analysis_key == "NULL"] <- NA
 ## export
 analysis_key %>% write.csv("1-data/analysis_key.csv", row.names = F, na = "")
 
+#
+
+## gravimetric water -----------------------------------------------------
+moisture = read_sheet("1O0FUsGdXODRIA5Ol7u_IS_-EjEt96ElI8XFdQiKLtls") %>% mutate_all(as.character)
+moisture[moisture == "NULL"] <- NA
+moisture_summary  = 
+  moisture %>%
+  mutate(moisture_percent = as.numeric(moisture_percent)) %>% 
+  group_by(location) %>% 
+  dplyr::summarise(moisture_percent = mean(moisture_percent),
+                   moisture_percent = round(moisture_percent, 2))
+
+## export
+moisture_summary %>% write.csv("1-data/moisture.csv", row.names = F, na = "")
 
 #
 ######################## ####
