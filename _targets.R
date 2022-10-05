@@ -28,22 +28,34 @@ list(
   tar_target(sample_weights, read.csv("1-data/sample_weights.csv")),
   tar_target(analysis_key, read.csv("1-data/analysis_key.csv")),
   tar_target(moisture, read.csv("1-data/moisture.csv")),
+  tar_target(dry_weight, compute_weights(sample_weights, moisture)),
   
   # optode
   tar_target(optode_data, import_optode_data("1-data/optodes")),
   tar_target(optode_map, read_sheet("1Pumt5ZA2Ojc8Ow-Ex-gH63ChtTtZs1gPKc50UM098rY") %>% 
-               mutate(optode_disc_number = as.character(optode_disc_number))),
+               mutate_all(as.character)),
   tar_target(optode_data_processed, process_optode_data(optode_data, optode_map, sample_key)),
   tar_target(gg_optode_all, plot_optode_data_all_samples(optode_data_processed)),
   tar_target(gg_optode, plot_optode_data(optode_data_processed)),
   
   # weoc
   tar_target(weoc_data, import_weoc_data(FILEPATH = "1-data/npoc", PATTERN = "Summary")),
-  tar_target(weoc_processed, process_weoc(weoc_data, analysis_key, moisture, sample_weights)),
-  tar_target(gg_weoc, plot_weoc(weoc_processed)),
+  tar_target(weoc_processed, process_weoc(weoc_data, analysis_key, dry_weight)),
+  tar_target(gg_weoc, plot_weoc(weoc_processed, sample_key)),
+  
+  # ions
+  tar_target(ions_raw, import_ions_data(FILEPATH = "1-data/ions/")),
+  tar_target(ions_processed, process_ions_data(ions_raw, dry_weight,
+                                           IONS = c("Lithium", "Sodium", "Ammonia", 
+                                                    "Potassium", "Magnesium", "Calcium", 
+                                                    "Nitrite", "Nitrate", "Chloride", 
+                                                    "Bromide", "Sulfate", "Phosphate", 
+                                                    "Fluoride"))$samples),
+  tar_target(gg_ions, plot_ions(ions_processed, sample_key))
+  
   
   # report
-  tar_render(report, path = "3-reports/anoxia_report.Rmd")
+#  tar_render(report, path = "3-reports/anoxia_report.Rmd")
   
 
   

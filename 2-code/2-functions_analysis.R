@@ -178,8 +178,10 @@ compute_optode_slope = function(optode_data_processed){
     
 }
 
-
-plot_weoc = function(weoc_processed){
+#
+# WEOC ----
+ 
+plot_weoc = function(weoc_processed, sample_key){
   weoc = 
     weoc_processed %>% 
     left_join(sample_key) %>% 
@@ -208,4 +210,36 @@ plot_weoc = function(weoc_processed){
 }
 
 
+#
+# IONS ----
 
+plot_ions = function(ions_processed, sample_key){
+  ions = 
+    ions_processed %>% 
+    left_join(sample_key)
+
+  ions_mg_l = 
+    ions %>% 
+    recode_levels() %>% 
+    filter(location != "blank-filter") %>% 
+    ggplot(aes(x = timepoint, y = amount_ppm))+
+    geom_point()+
+    facet_wrap(ion ~ location, scales = "free_y")+
+    labs(title = "Dissolved ions",
+         x = "", 
+         y = "Ion concentrations, mg/L")  
+  
+  ions_ug_g =
+    ions %>% 
+    recode_levels() %>% 
+    filter(location != "blank-filter") %>% 
+    ggplot(aes(x = timepoint, y = amount_ug_g))+
+    geom_point()+
+    facet_wrap(ion ~ location, scales = "free_y")+
+    labs(title = "Dissolved ions",
+         x = "", 
+         y = "Ion concentrations, μg/g soil")
+  
+  list(ions_mg_l = ions_mg_l,
+       ions_ug_g = ions_ug_g)
+}
