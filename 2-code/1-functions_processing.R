@@ -119,7 +119,7 @@ import_ions_data = function(FILEPATH){
   
   filePaths <- list.files(path = FILEPATH, pattern = ".csv", full.names = TRUE)
   
-  do.call(bind_rows, lapply(filePaths, function(path){
+  ions_raw = do.call(bind_rows, lapply(filePaths, function(path){
     # then add a new column `source` to denote the file name
     df <- read.csv(path, skip = 2)
     df[["source"]] <- rep(path, nrow(df))
@@ -173,6 +173,7 @@ process_ions_data = function(ions_raw, IONS, dry_weight){
   data_new_processed = 
     data_new %>% 
     janitor::clean_names() %>% 
+    filter(!notes %in% "skip") %>% 
     mutate_all(na_if,"") %>% 
     filter(!is.na(no)) %>% 
     dplyr::select(name, ion, amount) %>% 
@@ -187,7 +188,7 @@ process_ions_data = function(ions_raw, IONS, dry_weight){
                             grepl("water", name, ignore.case = T) ~ "water",
                             str_detect(name, "[0-9]x") ~ "calibration",
                             TRUE ~ "sample")) %>% 
-    filter(ion %in% c("Ammonia", "Nitrate", "Chloride", "Sulfate", "Phosphate")) %>% 
+    filter(ion %in% c("Nitrate", "Chloride", "Sulfate", "Phosphate")) %>% 
     force()
   
   # c. finishing touches ----
