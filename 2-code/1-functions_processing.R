@@ -120,9 +120,7 @@ import_ions_data = function(FILEPATH){
 # Now, run this function
 raw_data <- import_ions_data(FILEPATH = "1-data/ions/")
 
-
-#
-# 3. Process data
+## process
 
 # `process_data`: this function will assign ions and tidy the dataframe
 # input parameters are (a) the dataframe being cleaned and (b) the ions in question.
@@ -180,6 +178,7 @@ process_data = function(raw_data, IONS){
                             grepl("water", name, ignore.case = T) ~ "water",
                             str_detect(name, "[0-9]x") ~ "calibration",
                             TRUE ~ "sample")) %>% 
+    filter(ion %in% c("Ammonia", "Nitrate", "Chloride", "Sulfate", "Phosphate")) %>% 
     force()
   
     samples = 
@@ -198,7 +197,7 @@ process_data = function(raw_data, IONS){
 
 # Now, run the function
 # set ions of interest
-all_ions = c("Lithium", "Sodium", "Ammonium", "Potassium", "Magnesium", "Calcium", "Nitrite", "Nitrate",
+all_ions = c("Lithium", "Sodium", "Ammonia", "Potassium", "Magnesium", "Calcium", "Nitrite", "Nitrate",
              "Chloride", "Bromide", "Sulfate", "Phosphate", "Fluoride")
 
 data_ions_processed = process_data(raw_data, IONS = all_ions)$samples
