@@ -23,8 +23,8 @@ recode_levels = function(dat){
 
 
 #
-# process data ------------------------------------------------------------
-# optodes
+# process data - optodes --------------------------------------------------
+
 
 import_optode_data = function(FILEPATH){
   filePaths_spectra <- list.files(path = FILEPATH,pattern = "*.csv", full.names = TRUE)
@@ -51,8 +51,9 @@ process_optode_data = function(optode_data, optode_map, sample_key){
     mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water")))
 }
 
+#
+# process data - WEOC -----------------------------------------------------
 
-# WEOC
 import_weoc_data = function(FILEPATH, PATTERN){
   
   filePaths_weoc <- list.files(path = FILEPATH, pattern = PATTERN, full.names = TRUE)
@@ -99,7 +100,7 @@ process_weoc = function(weoc_data, analysis_key, moisture, sample_weights){
 }
 
 
-
+#
 # process data - ions -----------------------------------------------------
 ## import 
 import_ions_data = function(FILEPATH){
