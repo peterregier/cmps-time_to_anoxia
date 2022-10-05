@@ -51,11 +51,17 @@ list(
                                                     "Nitrite", "Nitrate", "Chloride", 
                                                     "Bromide", "Sulfate", "Phosphate", 
                                                     "Fluoride"))$samples),
-  tar_target(gg_ions, plot_ions(ions_processed, sample_key))
+  tar_target(gg_ions, plot_ions(ions_processed, sample_key)),
+  
+  # pH
+  tar_target(pH_data, read_sheet("1zMu8HR3Wak4Ru64BQkc1GQBWg8CdKrw-u1LZRQhR2rA") %>% 
+               mutate_all(as.character)),
+  tar_target(pH_processed, process_pH(pH_data)),
+  tar_target(gg_pH, plot_pH(pH_processed, sample_key)),
   
   
   # report
-#  tar_render(report, path = "3-reports/anoxia_report.Rmd")
+  tar_render(report, path = "3-reports/anoxia_report.Rmd")
   
 
   

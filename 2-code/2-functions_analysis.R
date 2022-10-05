@@ -243,3 +243,23 @@ plot_ions = function(ions_processed, sample_key){
   list(ions_mg_l = ions_mg_l,
        ions_ug_g = ions_ug_g)
 }
+
+# pH ----
+
+plot_pH = function(pH_processed, sample_key){
+  
+  pH = 
+    pH_processed %>% 
+    left_join(sample_key)
+  
+    pH %>% 
+    recode_levels() %>% 
+    filter(location != "blank-filter") %>% 
+    ggplot(aes(x = timepoint, y = pH))+
+    geom_point()+
+    facet_wrap(. ~ location)+
+    labs(title = "pH",
+         x = "", 
+         y = "pH")  
+  
+}

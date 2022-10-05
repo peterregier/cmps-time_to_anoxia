@@ -213,3 +213,17 @@ process_ions_data = function(ions_raw, IONS, dry_weight){
   list(samples = samples)
   
 }
+
+
+#
+
+# process data - pH -------------------------------------------------------
+process_pH = function(pH_data){
+  #pH_processed = 
+  pH_data %>% 
+    dplyr::select(sample_name, pH) %>% 
+    mutate(pH = as.numeric(pH)) %>% 
+    filter(grepl("anoxia", sample_name))
+  
+}
+  
