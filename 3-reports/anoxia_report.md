@@ -19,6 +19,8 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 
 ## Dissolved nutrients/chemistry
 
+### Water extractable organic C
+
     ## $mg_l
 
 ![](anoxia_report_files/figure-gfm/weoc-1.png)<!-- -->
@@ -28,6 +30,21 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 
 ![](anoxia_report_files/figure-gfm/weoc-2.png)<!-- -->
 
+### Dissolved ions
+
+    ## $ions_mg_l
+
+![](anoxia_report_files/figure-gfm/ions-1.png)<!-- -->
+
+    ## 
+    ## $ions_ug_g
+
+![](anoxia_report_files/figure-gfm/ions-2.png)<!-- -->
+
+### pH
+
+![](anoxia_report_files/figure-gfm/pH-1.png)<!-- -->
+
 ------------------------------------------------------------------------
 
 <details>
@@ -35,11 +52,11 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 Session Info
 </summary>
 
-Date run: 2022-08-21
+Date run: 2022-10-05
 
     ## R version 4.2.1 (2022-06-23)
     ## Platform: x86_64-apple-darwin17.0 (64-bit)
-    ## Running under: macOS Catalina 10.15.7
+    ## Running under: macOS Big Sur ... 10.16
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
@@ -52,28 +69,28 @@ Date run: 2022-08-21
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] googlesheets4_1.0.0 forcats_0.5.1       stringr_1.4.0      
+    ##  [1] googlesheets4_1.0.1 forcats_0.5.2       stringr_1.4.1      
     ##  [4] dplyr_1.0.9         purrr_0.3.4         readr_2.1.2        
     ##  [7] tidyr_1.2.0         tibble_3.1.8        ggplot2_3.3.6      
-    ## [10] tidyverse_1.3.2     tarchetypes_0.6.0   targets_0.12.1     
+    ## [10] tidyverse_1.3.2     tarchetypes_0.7.0   targets_0.13.1     
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] lubridate_1.8.0   ps_1.7.1          assertthat_0.2.1  digest_0.6.29    
     ##  [5] utf8_1.2.2        R6_2.5.1          cellranger_1.1.0  backports_1.4.1  
-    ##  [9] reprex_2.0.1      evaluate_0.15     highr_0.9         httr_1.4.3       
-    ## [13] pillar_1.8.0      rlang_1.0.4       curl_4.3.2        readxl_1.4.0     
-    ## [17] rstudioapi_0.13   data.table_1.14.2 callr_3.7.1       rmarkdown_2.14   
+    ##  [9] reprex_2.0.2      evaluate_0.16     highr_0.9         httr_1.4.4       
+    ## [13] pillar_1.8.1      rlang_1.0.5       curl_4.3.2        readxl_1.4.1     
+    ## [17] rstudioapi_0.14   data.table_1.14.2 callr_3.7.2       rmarkdown_2.16   
     ## [21] labeling_0.4.2    googledrive_2.0.0 igraph_1.3.4      munsell_0.5.0    
-    ## [25] broom_1.0.0       compiler_4.2.1    modelr_0.1.8      xfun_0.31        
+    ## [25] broom_1.0.0       compiler_4.2.1    modelr_0.1.9      xfun_0.32        
     ## [29] pkgconfig_2.0.3   askpass_1.1       htmltools_0.5.3   openssl_2.0.2    
     ## [33] tidyselect_1.1.2  codetools_0.2-18  fansi_1.0.3       crayon_1.5.1     
     ## [37] tzdb_0.3.0        dbplyr_2.2.1      withr_2.5.0       rappdirs_0.3.3   
     ## [41] grid_4.2.1        jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1  
-    ## [45] DBI_1.1.3         magrittr_2.0.3    scales_1.2.0      cli_3.3.0        
+    ## [45] DBI_1.1.3         magrittr_2.0.3    scales_1.2.1      cli_3.3.0        
     ## [49] stringi_1.7.8     farver_2.1.1      fs_1.5.2          xml2_1.3.3       
     ## [53] ellipsis_0.3.2    generics_0.1.3    vctrs_0.4.1       tools_4.2.1      
-    ## [57] glue_1.6.2        hms_1.1.1         fastmap_1.1.0     processx_3.7.0   
+    ## [57] glue_1.6.2        hms_1.1.2         fastmap_1.1.0     processx_3.7.0   
     ## [61] yaml_2.3.5        colorspace_2.0-3  gargle_1.2.0      base64url_1.4    
-    ## [65] rvest_1.0.2       knitr_1.39        haven_2.5.0
+    ## [65] rvest_1.0.3       knitr_1.40        haven_2.5.1
 
 </details>

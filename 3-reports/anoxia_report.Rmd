@@ -33,10 +33,21 @@ tar_read(gg_optode_all)$individual
 
 
 ## Dissolved nutrients/chemistry
+
+### Water extractable organic C
 ```{r, weoc}
 tar_read(gg_weoc)
 ```
 
+### Dissolved ions
+```{r, ions, fig.height=10, fig.width=10}
+tar_read(gg_ions)
+```
+
+### pH
+```{r, pH}
+tar_read(gg_pH)
+```
 
 
 
