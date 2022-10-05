@@ -40,7 +40,6 @@ compute_weights = function(sample_weights, moisture){
 
 #
 # process data - optodes --------------------------------------------------
-
 import_optode_data = function(FILEPATH){
   filePaths_spectra <- list.files(path = FILEPATH,pattern = "*.csv", full.names = TRUE)
   spectra_dat <- do.call(rbind, lapply(filePaths_spectra, function(path) {
@@ -69,7 +68,6 @@ process_optode_data = function(optode_data, optode_map, sample_key){
 
 #
 # process data - WEOC -----------------------------------------------------
-
 import_weoc_data = function(FILEPATH, PATTERN){
   
   filePaths_weoc <- list.files(path = FILEPATH, pattern = PATTERN, full.names = TRUE)
@@ -111,7 +109,6 @@ process_weoc = function(weoc_data, analysis_key, dry_weight){
   npoc_samples
 }
 
-
 #
 # process data - ions -----------------------------------------------------
 ## import 
@@ -130,23 +127,22 @@ import_ions_data = function(FILEPATH){
   
 }
 
-# Now, run this function
-raw_data <- import_ions_data(FILEPATH = "1-data/ions/")
-
 ## process
 
 # `process_data`: this function will assign ions and tidy the dataframe
 # input parameters are (a) the dataframe being cleaned and (b) the ions in question.
 
-process_data = function(raw_data, IONS){
+process_ions_data = function(ions_raw, IONS, dry_weight){
   
-  # The input data are in shitty, non-tidy format, with multi-line headers and multiple chunks of data per dataframe.  
-  # This function assigns the ions and turns it into tidy format, then cleans/processes the dataframe
+  # The input data are in shitty, non-tidy format, 
+  # with multi-line headers and multiple chunks of data per dataframe.  
+  # This function assigns the ions and turns it into tidy format, 
+  # then cleans/processes the dataframe
   
   # a. assign ions ----
   
   # identify the rows that contain ions names
-  label_rows = which(grepl(paste(IONS, collapse = "|"), raw_data$Time))
+  label_rows = which(grepl(paste(IONS, collapse = "|"), ions_raw$Time))
   
   # make this a dataframe/tibble
   label_rows_df = 
@@ -158,7 +154,7 @@ process_data = function(raw_data, IONS){
   
   # now join this to the dataframe
   data_new = 
-    raw_data %>% 
+    ions_raw %>% 
     rownames_to_column("Row_number") %>% 
     left_join(label_rows_df) %>% 
     mutate(Ion = case_when(label ~ Amount)) %>% 
@@ -194,21 +190,25 @@ process_data = function(raw_data, IONS){
     filter(ion %in% c("Ammonia", "Nitrate", "Chloride", "Sulfate", "Phosphate")) %>% 
     force()
   
-    samples = 
-      data_new_processed %>% 
-      filter(type == "sample") %>% 
-      mutate(sample_name = paste0("anoxia_", str_pad(name, 3, pad = "0"))) %>% 
-      dplyr::select(sample_name, ion, amount_ppm) %>% 
-      left_join(dry_weight) %>% 
-      mutate(amount_ug_g = amount_ppm * ((40 + soilwater_g)/od_g),
-             amount_ug_g = round(amount_ug_g, 2)) %>% 
-      dplyr::select(sample_name, ion, amount_ppm, amount_ug_g) %>% 
-      force()
-    
-    calibration = 
-      data_new_processed %>% 
-      filter(type == "calibration")
-
-    list(samples = samples)
-
+  # c. finishing touches ----
+  samples = 
+    data_new_processed %>% 
+    filter(type == "sample") %>% 
+    mutate(sample_name = paste0("anoxia_", str_pad(name, 3, pad = "0"))) %>% 
+    dplyr::select(sample_name, ion, amount_ppm) %>% 
+    left_join(dry_weight) %>% 
+    mutate(amount_ug_g = amount_ppm * ((40 + soilwater_g)/od_g),
+           amount_ug_g = round(amount_ug_g, 2)) %>% 
+    dplyr::select(sample_name, ion, amount_ppm, amount_ug_g) %>% 
+    force()
+  # filter blanks are all below detect, so no need to blank-correct
+  # samples were not diluted, so no need to dilution-correct
+  
+  calibration = 
+    data_new_processed %>% 
+    filter(type == "calibration")
+  
+  # d. output ----
+  list(samples = samples)
+  
 }
