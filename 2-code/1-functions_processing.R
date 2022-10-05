@@ -10,9 +10,8 @@
 
 
 
-# refactor functions ------------------------------------------------------
-## functions to set the order of factors
-
+# prelim functions --------------------------------------------------------
+## reorder factors
 recode_levels = function(dat){
   dat %>% 
     mutate(location = factor(location, 
@@ -21,10 +20,26 @@ recode_levels = function(dat){
                               levels = c("time-zero", "12-hour", "24-hour", "2-week")))
 }
 
+#
+## compute dry weights
+compute_weights = function(sample_weights, moisture){
+  
+  dry_weights = 
+    sample_weights %>% 
+   # dplyr::select(sample_name, location, weight_g) %>% 
+    left_join(moisture %>% mutate(moisture_percent = as.numeric(moisture_percent))) %>% 
+    mutate(weight_g = as.numeric(weight_g)) %>% 
+    rename(fm_g = weight_g) %>% 
+    mutate(od_g = fm_g/((moisture_percent/100)+1),
+           soilwater_g = fm_g - od_g) %>% 
+   # filter(!is.na(sample_name)) %>% 
+    force()
+  
+  dry_weights
+}
 
 #
 # process data - optodes --------------------------------------------------
-
 
 import_optode_data = function(FILEPATH){
   filePaths_spectra <- list.files(path = FILEPATH,pattern = "*.csv", full.names = TRUE)
@@ -46,7 +61,8 @@ process_optode_data = function(optode_data, optode_map, sample_key){
     mutate(start_date = str_extract(source, "[0-9]{4}-[0-9]{2}-[0-9]{2}"),
            start_date = lubridate::ymd(start_date)) %>% 
     dplyr::select(-source) %>% 
-    left_join(optode_map %>% dplyr::select(start_date, optode_disc_number, sample_name)) %>% 
+    left_join(optode_map %>% dplyr::select(start_date, optode_disc_number, sample_name) %>% 
+                mutate(start_date = lubridate::ymd(start_date))) %>% 
     left_join(sample_key) %>% 
     mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water")))
 }
@@ -62,7 +78,7 @@ import_weoc_data = function(FILEPATH, PATTERN){
     df}))
   
 }
-process_weoc = function(weoc_data, analysis_key, moisture, sample_weights){
+process_weoc = function(weoc_data, analysis_key, dry_weight){
   
   npoc_processed = 
     weoc_data %>% 
@@ -82,12 +98,8 @@ process_weoc = function(weoc_data, analysis_key, moisture, sample_weights){
     mutate(NPOC_dilution = as.numeric(NPOC_dilution),
            npoc_corr_mgL = (npoc_mgL-blank_mgL) * NPOC_dilution) %>% 
     # join gwc and subsampling weights to normalize data to soil weight
-        left_join(moisture) %>% 
-        left_join(sample_weights %>% dplyr::select(sample_name, weight_g)) %>% 
-        rename(fm_g = weight_g) %>% 
-        mutate(od_g = fm_g/((moisture_percent/100)+1),
-               soilwater_g = fm_g - od_g,
-               npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
+        left_join(dry_weight) %>% 
+        mutate(npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
                npoc_ug_g = round(npoc_ug_g, 2)) %>% 
         dplyr::select(sample_name, npoc_corr_mgL, npoc_ug_g) %>% 
     force()
@@ -186,7 +198,12 @@ process_data = function(raw_data, IONS){
       data_new_processed %>% 
       filter(type == "sample") %>% 
       mutate(sample_name = paste0("anoxia_", str_pad(name, 3, pad = "0"))) %>% 
-      dplyr::select(sample_name, ion, amount_ppm)
+      dplyr::select(sample_name, ion, amount_ppm) %>% 
+      left_join(dry_weight) %>% 
+      mutate(amount_ug_g = amount_ppm * ((40 + soilwater_g)/od_g),
+             amount_ug_g = round(amount_ug_g, 2)) %>% 
+      dplyr::select(sample_name, ion, amount_ppm, amount_ug_g) %>% 
+      force()
     
     calibration = 
       data_new_processed %>% 
@@ -195,12 +212,3 @@ process_data = function(raw_data, IONS){
     list(samples = samples)
 
 }
-
-# Now, run the function
-# set ions of interest
-all_ions = c("Lithium", "Sodium", "Ammonia", "Potassium", "Magnesium", "Calcium", "Nitrite", "Nitrate",
-             "Chloride", "Bromide", "Sulfate", "Phosphate", "Fluoride")
-
-data_ions_processed = process_data(raw_data, IONS = all_ions)$samples
-
-#
