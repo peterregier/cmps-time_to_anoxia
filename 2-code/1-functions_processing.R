@@ -63,6 +63,7 @@ process_optode_data = function(optode_data, optode_map, sample_key){
     left_join(optode_map %>% dplyr::select(start_date, optode_disc_number, sample_name) %>% 
                 mutate(start_date = lubridate::ymd(start_date))) %>% 
     left_join(sample_key) %>% 
+    filter(!notes %in% "skip optode") %>% 
     mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water")))
 }
 
