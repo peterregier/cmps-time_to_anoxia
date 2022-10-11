@@ -98,7 +98,7 @@ process_weoc = function(weoc_data, analysis_key, dry_weight){
            npoc_corr_mgL = (npoc_mgL-blank_mgL) * NPOC_dilution) %>% 
     # join gwc and subsampling weights to normalize data to soil weight
         left_join(dry_weight) %>% 
-        mutate(npoc_ug_g = npoc_corr_mgL * ((40 + soilwater_g)/od_g),
+        mutate(npoc_ug_g = npoc_corr_mgL * ((water_g + soilwater_g)/od_g),
                npoc_ug_g = round(npoc_ug_g, 2)) %>% 
         dplyr::select(sample_name, npoc_corr_mgL, npoc_ug_g) %>% 
     force()
@@ -199,7 +199,7 @@ process_ions_data = function(ions_raw, IONS, dry_weight){
     mutate(sample_name = paste0("anoxia_", str_pad(name, 3, pad = "0"))) %>% 
     dplyr::select(sample_name, ion, amount_ppm) %>% 
     left_join(dry_weight) %>% 
-    mutate(amount_ug_g = amount_ppm * ((40 + soilwater_g)/od_g),
+    mutate(amount_ug_g = amount_ppm * ((water_g + soilwater_g)/od_g),
            amount_ug_g = round(amount_ug_g, 2)) %>% 
     dplyr::select(sample_name, ion, amount_ppm, amount_ug_g) %>% 
     force()

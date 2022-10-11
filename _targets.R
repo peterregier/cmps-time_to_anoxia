@@ -25,7 +25,8 @@ source("2-code/2-functions_analysis.R")
 list(
   tar_target(sample_key_file, "1-data/sample_key.csv", format = "file"),
   tar_target(sample_key, read.csv(sample_key_file)),
-  tar_target(sample_weights, read.csv("1-data/sample_weights.csv")),
+  tar_target(sample_weights_file, "1-data/sample_weights.csv", format = "file"),
+  tar_target(sample_weights, read.csv(sample_weights_file)),
   tar_target(analysis_key, read.csv("1-data/analysis_key.csv")),
   tar_target(moisture, read.csv("1-data/moisture.csv")),
   tar_target(dry_weight, compute_weights(sample_weights, moisture)),
