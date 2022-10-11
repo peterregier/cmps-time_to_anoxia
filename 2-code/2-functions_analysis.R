@@ -41,6 +41,21 @@ plot_optode_data = function(optode_data_processed){
     filter(!grepl("skip", notes)) %>% 
     filter(!is.na(location)) %>% 
     filter(location != "water") %>% 
+    filter(timepoint == "24-hour") %>% 
+    ggplot(aes(x = time_minutes, y = corrected_do_mg_L, color = sample_name))+
+    geom_line()+
+    labs(#title = "Time to Anoxia",
+      x = "Elapsed time, minutes",
+      y = "Dissolved oxygen, mg/L")+
+    #geom_smooth(se = F)+
+    facet_grid(timepoint ~ location)+
+    theme(legend.position = "none")
+  
+  grouped2 = 
+    optode_data_processed %>% 
+    filter(!grepl("skip", notes)) %>% 
+    filter(!is.na(location)) %>% 
+    filter(location != "water") %>% 
     ggplot(aes(x = time_minutes, y = do_mg_L, color = sample_name))+
     geom_line()+
     labs(#title = "Time to Anoxia",
@@ -175,7 +190,7 @@ compute_optode_slope = function(optode_data_processed){
     mutate(do_slope = (do_mg_L_START - do_mg_L_STOP) / ((time_minutes_STOP - time_minutes_START)/60))
     
   
-    
+  
 }
 
 #

@@ -11,8 +11,6 @@ centrifuged and filtered, and analyzed for dissolved nutrients
 
 ## Optode data (dissolved oxygen)
 
-![](anoxia_report_files/figure-gfm/optode_group_all-1.png)<!-- -->
-
 ![](anoxia_report_files/figure-gfm/optode_group_subset-1.png)<!-- -->
 
 ![](anoxia_report_files/figure-gfm/optode_indiv_all-1.png)<!-- -->
@@ -81,17 +79,16 @@ Date run: 2022-10-11
     ## [13] pillar_1.8.1      rlang_1.0.5       curl_4.3.2        readxl_1.4.1     
     ## [17] rstudioapi_0.14   data.table_1.14.2 callr_3.7.2       rmarkdown_2.16   
     ## [21] labeling_0.4.2    googledrive_2.0.0 igraph_1.3.4      munsell_0.5.0    
-    ## [25] broom_1.0.0       janitor_2.1.0     compiler_4.2.1    modelr_0.1.9     
-    ## [29] xfun_0.32         pkgconfig_2.0.3   askpass_1.1       htmltools_0.5.3  
-    ## [33] openssl_2.0.2     tidyselect_1.1.2  codetools_0.2-18  fansi_1.0.3      
-    ## [37] crayon_1.5.1      tzdb_0.3.0        dbplyr_2.2.1      withr_2.5.0      
-    ## [41] rappdirs_0.3.3    grid_4.2.1        jsonlite_1.8.0    gtable_0.3.0     
-    ## [45] lifecycle_1.0.1   DBI_1.1.3         magrittr_2.0.3    scales_1.2.1     
-    ## [49] cli_3.3.0         stringi_1.7.8     farver_2.1.1      fs_1.5.2         
-    ## [53] snakecase_0.11.0  xml2_1.3.3        ellipsis_0.3.2    generics_0.1.3   
-    ## [57] vctrs_0.4.1       tools_4.2.1       glue_1.6.2        hms_1.1.2        
-    ## [61] fastmap_1.1.0     processx_3.7.0    yaml_2.3.5        colorspace_2.0-3 
-    ## [65] gargle_1.2.0      base64url_1.4     rvest_1.0.3       knitr_1.40       
-    ## [69] haven_2.5.1
+    ## [25] broom_1.0.0       compiler_4.2.1    modelr_0.1.9      xfun_0.32        
+    ## [29] pkgconfig_2.0.3   askpass_1.1       htmltools_0.5.3   openssl_2.0.2    
+    ## [33] tidyselect_1.1.2  codetools_0.2-18  fansi_1.0.3       crayon_1.5.1     
+    ## [37] tzdb_0.3.0        dbplyr_2.2.1      withr_2.5.0       rappdirs_0.3.3   
+    ## [41] grid_4.2.1        jsonlite_1.8.0    gtable_0.3.0      lifecycle_1.0.1  
+    ## [45] DBI_1.1.3         magrittr_2.0.3    scales_1.2.1      cli_3.3.0        
+    ## [49] stringi_1.7.8     farver_2.1.1      fs_1.5.2          xml2_1.3.3       
+    ## [53] ellipsis_0.3.2    generics_0.1.3    vctrs_0.4.1       tools_4.2.1      
+    ## [57] glue_1.6.2        hms_1.1.2         fastmap_1.1.0     processx_3.7.0   
+    ## [61] yaml_2.3.5        colorspace_2.0-3  gargle_1.2.0      base64url_1.4    
+    ## [65] rvest_1.0.3       knitr_1.40        haven_2.5.1
 
 </details>

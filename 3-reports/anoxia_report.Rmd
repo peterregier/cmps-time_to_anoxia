@@ -19,11 +19,11 @@ knitr::opts_chunk$set(echo = FALSE,
 ```
 
 
-```{r optode_group_all, fig.height=4, fig.width=8}
+```{r optode_group_all, fig.height=4, fig.width=8, eval=FALSE}
 tar_read(gg_optode_all)$grouped
 ```
 
-```{r optode_group_subset, fig.height=4, fig.width=8}
+```{r optode_group_subset, fig.height=3, fig.width=9}
 tar_read(gg_optode)$grouped
 ```
 
