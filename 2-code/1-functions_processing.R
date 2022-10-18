@@ -17,7 +17,9 @@ recode_levels = function(dat){
     mutate(location = factor(location, 
                              levels = c("upland-A", "upland-B", "transition-A", "wetland-A")),
            timepoint = factor(timepoint, 
-                              levels = c("time-zero", "12-hour", "24-hour", "2-week")))
+                              levels = c("time-zero", "12-hour", "24-hour", "2-week")),
+           transect = factor(transect,
+                             levels = c("upland", "transition", "wetland")))
 }
 
 #
@@ -41,7 +43,7 @@ compute_weights = function(sample_weights, moisture){
 #
 # process data - optodes --------------------------------------------------
 import_optode_data = function(FILEPATH){
-  filePaths_spectra <- list.files(path = FILEPATH,pattern = "*.csv", full.names = TRUE)
+  filePaths_spectra <- list.files(path = FILEPATH,pattern = "*hr.csv", full.names = TRUE)
   spectra_dat <- do.call(rbind, lapply(filePaths_spectra, function(path) {
     df <- read.csv(path, header=TRUE, skip = 4, check.names = F)
     df %<>%
@@ -51,17 +53,39 @@ import_optode_data = function(FILEPATH){
     df[["source"]] <- rep(path, nrow(df))
     df}))
 }
-process_optode_data = function(optode_data, optode_map, sample_key){
+
+import_optode_data_2wk = function(PATH){
+  
+  dat = read.csv(PATH, check.names = F)
+  dat %>% 
+    pivot_longer(-date_time, names_to = "optode_disc_number", values_to = "do_mg_L") %>% 
+    #mutate(timepoint = "2-wk") %>% 
+    force()
+  
+}
+
+process_optode_data = function(optode_data, optode_data_2wk, optode_map, sample_key){
   
  # sample_key= read.csv( "1-data/sample_key.csv")
   
- # optode_data_processed = 
+ optode_24hr = 
     optode_data %>% 
     mutate(start_date = str_extract(source, "[0-9]{4}-[0-9]{2}-[0-9]{2}"),
            start_date = lubridate::ymd(start_date)) %>% 
     dplyr::select(-source) %>% 
     left_join(optode_map %>% dplyr::select(start_date, optode_disc_number, sample_name) %>% 
-                mutate(start_date = lubridate::ymd(start_date))) %>% 
+                mutate(start_date = lubridate::ymd(start_date))) 
+ 
+ optode_2wk = 
+   optode_data_2wk %>% 
+   mutate(date_time = lubridate::mdy_hm(date_time)) %>% 
+   separate(optode_disc_number, sep = "_", into = c("optode_disc_number", "sample_name"), extra = "merge") %>% 
+   mutate(time_minutes = difftime(date_time, min(date_time), units = "mins"),
+          time_minutes = as.numeric(time_minutes))
+ 
+ optode_combined = 
+   optode_24hr %>% 
+   bind_rows(optode_2wk) %>% 
     left_join(sample_key) %>% 
     filter(!notes %in% "skip optode") %>% 
     mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water"))) %>% 
@@ -71,6 +95,9 @@ process_optode_data = function(optode_data, optode_map, sample_key){
            corrected_do_mg_L = case_when(grepl("-B", location) ~ do_mg_L,
                                     TRUE ~ do_mg_L - difference_do)) %>% 
     dplyr::select(timestep, time_minutes, start_date, sample_name, site, location, timepoint, do_mg_L, corrected_do_mg_L, notes)
+ 
+ optode_combined
+ 
 }
 
 #
