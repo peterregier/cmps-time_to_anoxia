@@ -16,6 +16,8 @@ Soil samples were inundated with deionized water and incubated for 12-hr, 24-hr,
 knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
                       warning = FALSE)
+
+library(targets)
 ```
 
 
@@ -23,11 +25,11 @@ knitr::opts_chunk$set(echo = FALSE,
 tar_read(gg_optode_all)$grouped
 ```
 
-```{r optode_group_subset, fig.height=3, fig.width=9}
-tar_read(gg_optode)$grouped
+```{r optode_group_subset, fig.height=5, fig.width=16}
+tar_read(gg_optode)
 ```
 
-```{r optode_indiv_all, fig.height=12, fig.width=8}
+```{r optode_indiv_all, fig.height=12, fig.width=8, eval=FALSE}
 tar_read(gg_optode_all)$individual
 ```
 
@@ -35,17 +37,17 @@ tar_read(gg_optode_all)$individual
 ## Dissolved nutrients/chemistry
 
 ### Water extractable organic C
-```{r, weoc}
+```{r, weoc, fig.height=4.5, fig.width=10}
 tar_read(gg_weoc)
 ```
 
 ### Dissolved ions
-```{r, ions, fig.height=10, fig.width=10}
+```{r, ions, fig.height=12, fig.width=10}
 tar_read(gg_ions)
 ```
 
 ### pH
-```{r, pH}
+```{r, pH, fig.height=4.5, fig.width=10}
 tar_read(gg_pH)
 ```
 
