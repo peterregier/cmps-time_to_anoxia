@@ -33,9 +33,10 @@ list(
   
   # optode
   tar_target(optode_data, import_optode_data("1-data/optodes")),
+  tar_target(optode_data_2wk, import_optode_data_2wk("1-data/optodes/results_2022-09-15_2wk.csv")),
   tar_target(optode_map, read_sheet("1Pumt5ZA2Ojc8Ow-Ex-gH63ChtTtZs1gPKc50UM098rY") %>% 
                mutate_all(as.character)),
-  tar_target(optode_data_processed, process_optode_data(optode_data, optode_map, sample_key)),
+  tar_target(optode_data_processed, process_optode_data(optode_data, optode_data_2wk, optode_map, sample_key)),
   tar_target(gg_optode_all, plot_optode_data_all_samples(optode_data_processed)),
   tar_target(gg_optode, plot_optode_data(optode_data_processed)),
   
