@@ -61,6 +61,12 @@ list(
   tar_target(pH_processed, process_pH(pH_data)),
   tar_target(gg_pH, plot_pH(pH_processed, sample_key)),
   
+  # export
+  tar_target(exports, {
+    write.csv(optode_data_processed, "1-data/processed/optode_data_processed.csv", row.names = FALSE)
+    write.csv(ions_processed, "1-data/processed/ions_processed.csv", row.names = FALSE)
+    write.csv(pH_processed, "1-data/processed/pH_processed.csv", row.names = FALSE)
+  }, format = "file"),
   
   # report
   tar_render(report, path = "3-reports/anoxia_report.Rmd")
