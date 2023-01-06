@@ -86,18 +86,24 @@ process_optode_data = function(optode_data, optode_data_2wk, optode_map, sample_
  optode_combined = 
    optode_24hr %>% 
    bind_rows(optode_2wk) %>% 
-    left_join(sample_key) %>% 
-    filter(!notes %in% "skip optode") %>% 
-    mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water"))) %>% 
-    group_by(sample_name) %>% 
-    mutate(minimum_do = min(do_mg_L),
-           difference_do = minimum_do - 0,
-           corrected_do_mg_L = case_when(grepl("-B", location) ~ do_mg_L,
-                                    TRUE ~ do_mg_L - difference_do)) %>% 
-    dplyr::select(timestep, time_minutes, start_date, sample_name, site, location, timepoint, do_mg_L, corrected_do_mg_L, notes)
- 
+   left_join(sample_key) %>% 
+   filter(!notes %in% "skip optode") %>% 
+   mutate(location = factor(location, levels = c("upland-A", "upland-B", "transition-A", "wetland-A", "water"))) %>% 
+   group_by(sample_name) %>% 
+   mutate(minimum_do = min(do_mg_L),
+          difference_do = minimum_do - 0,
+          DO_corrected_mgL = case_when(grepl("-B", location) ~ do_mg_L,
+                                        TRUE ~ do_mg_L - difference_do),
+          # calculate rolling means
+          DO_rolling_mgL = zoo::rollmean(DO_corrected_mgL, k = 7, fill = NA),
+          DO_corrected_mgL = round(DO_corrected_mgL, 2),
+          DO_rolling_mgL = round(DO_rolling_mgL,2)) %>% 
+   dplyr::select(timestep, time_minutes, start_date, sample_name, site, location, timepoint, DO_corrected_mgL, DO_rolling_mgL, notes) %>% 
+   arrange(desc(DO_rolling_mgL)) %>% 
+   force()
+   
  optode_combined
- 
+
 }
 
 #

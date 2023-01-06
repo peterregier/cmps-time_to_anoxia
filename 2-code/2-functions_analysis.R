@@ -104,7 +104,7 @@ plot_optode_data = function(optode_data_processed){
     filter(location != "water") %>% 
     filter(timepoint == c("24-hour")) %>% 
     filter(timepoint == c("24-hour", "2-week-rep")) %>% 
-    ggplot(aes(x = time_minutes/60, y = corrected_do_mg_L, color = horizon, group = sample_name))+
+    ggplot(aes(x = time_minutes/60, y = DO_rolling_mgL, color = horizon, group = sample_name))+
     geom_line()+
     scale_color_manual(values = pal_horizons)+
     labs(#title = "Time to Anoxia",
@@ -121,7 +121,7 @@ plot_optode_data = function(optode_data_processed){
     filter(!is.na(location)) %>% 
     filter(location != "water") %>% 
     filter(timepoint == c("2-week-rep")) %>% 
-    ggplot(aes(x = (time_minutes/60)/24, y = corrected_do_mg_L, color = location, group = location))+
+    ggplot(aes(x = (time_minutes/60)/24, y = DO_rolling_mgL, color = location, group = location))+
     geom_line(size = 1)+
     #   scale_color_manual(values = soilpalettes::soil_palette("podzol", 5))+
     #      scale_color_manual(values = PNWColors::pnw_palette("Sunset2", 4))+
